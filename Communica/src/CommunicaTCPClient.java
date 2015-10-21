@@ -9,9 +9,9 @@ import java.net.UnknownHostException;
 public class CommunicaTCPClient extends CommunicaTCP{
 	private Socket mySocket;
 	
-	public CommunicaTCPClient(){
+	public CommunicaTCPClient(InetAddress ip, int port){
 		try {
-			mySocket = new Socket(InetAddress.getByName("localhost"), 43000);
+			mySocket = new Socket(ip, port);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

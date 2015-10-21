@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Scanner;
 
 
 public class CommunicaSystem {
@@ -11,13 +13,29 @@ public class CommunicaSystem {
 		InputStreamReader  myReader;
 		CommunicaTCP networkInterface = null;
 		
-			
-		 if (args[0].equals("S")){
-			 networkInterface = new CommunicaTCPServer();
-			 			 
-		 }else if (args[0].equals("C")){
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Mode ? (S)erver / (C)lient: ");
+		String mode = scanner.next();
+		System.out.print("Port: ");
+		int port = Integer.parseInt(scanner.next());
+		
+		 if (mode.equals("S")){
 			 
-			 networkInterface = new CommunicaTCPClient();
+			 networkInterface = new CommunicaTCPServer(port);
+			 			 
+		 }else if (mode.equals("C")){
+			 try {
+				 
+				 System.out.print("Server IP: ");
+				 InetAddress ip = InetAddress.getByName(scanner.next());
+				 networkInterface = new CommunicaTCPClient(ip, port);
+				 
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			 
 			 
 		 }		 
 		 

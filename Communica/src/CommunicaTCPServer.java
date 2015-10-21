@@ -8,10 +8,10 @@ public class CommunicaTCPServer extends CommunicaTCP {
 	private ServerSocket serverSk;
 	private Socket mySocket;
 	
-	public CommunicaTCPServer(){
+	public CommunicaTCPServer(int port){
 		mySocket = new Socket();
 		try {
-			serverSk = new ServerSocket(43000);
+			serverSk = new ServerSocket(port);
 			System.out.println("Waiting Client...");
 			mySocket = serverSk.accept();
 		} catch (IOException e) {
